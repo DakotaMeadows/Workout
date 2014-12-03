@@ -11,12 +11,7 @@
 </form>
 
 <h4>Let the Gym Gods Decide:</h4>
-<form id="random_workout_generator" action="/<%= @user.name %>" method="POST">
-  Name:<br>
-  <input name="title" type="text"><br>
-  Type:<br>
-  <input name="type" type="text"><br>
-  Sets:</br>
-  <input name="how_many" type="text"><br>
-  <input type="submit" value="Create">
+<form id="new" action="/<%= @user.name %>" method="POST">
+  <input name="workout[name]" type="text"><br>
+  <input type="submit" value="Add">
 </form>

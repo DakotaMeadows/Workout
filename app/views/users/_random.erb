@@ -1,0 +1,6 @@
+<% new_workout = Workout.create(name: @title, category: @type, description: "#{DateTime.now}") %>
+
+<% @exercises_with_type.each do |exercise| %>
+  <% Session.create(exercise_id: exercise.id, workout_id: new_workout.id) %>
+
+<% end %>

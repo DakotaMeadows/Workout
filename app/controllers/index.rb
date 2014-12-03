@@ -124,12 +124,24 @@ get '/:name' do |name|
 end
 
 post '/:name' do |name|
-  @user = User.find_by(name: name)
-  @workout = Workout.find_by(params[:workout])
-  Schedule.create(user_id: @user.id, workout_id: @workout.id)
-  if request.xhr?
-    erb :'users/_add_workout', layout: false
+  if params[:title]
+    @title = params[:title]
+    @type = params[:type]
+    @exercises = Exercise.where(category: @type)
+    @how_many = params[:how_many]
+    if request.xhr?
+      erb :'users/_random', layout: false
+    else
+      redirect to ("/#{@user.name}")
+    end
   else
-    redirect to ("/#{@user.name}")
+    @user = User.find_by(name: name)
+    @workout = Workout.find_by(params[:workout])
+    Schedule.create(user_id: @user.id, workout_id: @workout.id)
+    if request.xhr?
+      erb :'users/_add_workout', layout: false
+    else
+      redirect to ("/#{@user.name}")
+    end
   end
 end

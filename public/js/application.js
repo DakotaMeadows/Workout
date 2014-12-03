@@ -15,6 +15,19 @@ $(document).ready(function() {
     });
   });
 
+  $('#random_workout_generator').submit(function(event) {
+    event.preventDefault();
+    var $target = $(event.target);
+
+    $.ajax({
+      url: $target.attr('action'),
+      type: $target.attr('method'),
+      data: $target.serialize()
+    }).done(function(response) {
+      $('#list').append(response);
+    });
+  });
+
   // $('#delete').submit(function(event) {
   //   event.preventDefault();
   //   $target = $(event.target);
