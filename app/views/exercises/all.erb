@@ -1,0 +1,13 @@
+<ol id="list">
+  <% @exercises.each do |exercise| %>
+    <li>
+      <a href="/exercise/<%= exercise.name %>"><%= exercise.name %></a> - <%= exercise.category %>
+      <form id="delete" action="/exercise/<%= exercise.name %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+      </form>
+    </li>
+  <% end %>
+</ol>
+
+<%= erb :'exercises/_new' %>

@@ -1,0 +1,9 @@
+<%= @workout.name %>
+<%= @workout.category %>
+<%= @workout.description %>
+
+
+  <form action="/workout/<%= @workout.name %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+  </form>

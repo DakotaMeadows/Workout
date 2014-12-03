@@ -1,0 +1,6 @@
+<li><a href="/workout/<%= @workout.name %>"><%= @workout.name %></a><%= @workout.category %></li>
+
+<form id="delete" action="/workouts" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>

@@ -1,0 +1,11 @@
+<%= display_error %>
+
+<form id="new" action="/workouts" method="POST">
+  Name:<br>
+  <input name="workout[name]" type="text"><br>
+  Type:<br>
+  <input name="workout[category]" type="text"><br>
+  Description:<br>
+  <textarea name="workout[description]"></textarea><br>
+  <input type="submit" value="Create Workout">
+</form>

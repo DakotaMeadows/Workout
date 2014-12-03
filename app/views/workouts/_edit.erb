@@ -1,0 +1,10 @@
+<%= display_error %>
+
+<form action="/workout/<%= @wiki.id %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  Title:<br>
+  <input name="wiki[title]" type="text" value="<%= @wiki.title %>"><br>
+  Content:<br>
+  <textarea name="revision[content]"><%= @revision.content %></textarea><br>
+  <input type="submit" value="Submit your wiki.">
+</form>
