@@ -1,4 +1,4 @@
-class Set < ActiveRecord::Base
+class Session < ActiveRecord::Base
   belongs_to :workout
   belongs_to :exercise
 end

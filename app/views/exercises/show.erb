@@ -1,0 +1,18 @@
+<%= @exercise.name %>
+<%= @exercise.category %>
+<%= @exercise.description %>
+
+
+  <form action="/exercise/<%= @exercise.name %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+  </form>
+
+
+Workouts Found In:
+<ol>
+  <% @exercise.workouts.each do |workout| %>
+    </li><%= workout.name %><br>
+    <%= workout.description %></li>
+  <% end %>
+</ol>

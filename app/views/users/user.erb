@@ -1,0 +1,12 @@
+<%= @user.name %>
+<ol id="list">
+  <% @user.workouts.each do |workout| %>
+    <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a><%= workout.category %></li>
+  <% end %>
+</ol>
+
+<form id="new" action="/<%= @user.name %>" method="POST">
+  Add Workout:<br>
+  <input name="workout[name]" type="text"><br>
+  <input type="submit" value="Add">
+</form>

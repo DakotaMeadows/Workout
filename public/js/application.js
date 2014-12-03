@@ -13,18 +13,19 @@ $(document).ready(function() {
     });
   });
 
-  $('#delete').submit(function(event) {
-    event.preventDefault();
-    $target = $(event.target);
+  // $('#delete').submit(function(event) {
+  //   event.preventDefault();
+  //   $target = $(event.target);
 
-    $.ajax({
-      url: $target.attr('action'),
-      type: "DELETE",
-      data: $target.serialize()
-    }).done(function(response) {
-      console.log(response);
-      $target.parent().remove();
-    })
-  })
+  //   $.ajax({
+  //     url: $target.attr('action'),
+  //     type: "POST",
+  //     dataType: "json",
+  //     data: {"_method":"delete"}
+  //   }).done(function(response) {
+  //     console.log(response);
+  //     $target.parent().remove();
+  //   })
+  // })
 
 });

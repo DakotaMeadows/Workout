@@ -1,12 +1,25 @@
+get '/' do
+
+  erb :homepage
+end
+
 # Workout Pages
 
 get '/workouts' do
-  @workouts = Workout.all
-  erb :'workouts/all'
+  if current_user
+    @workouts = Workout.all
+    erb :'workouts/all'
+  else
+    redirect to ('/')
+  end
 end
 
 get '/workout/new' do
-  erb :'workouts/_new'
+  if current_user
+    erb :'workouts/_new'
+  else
+    redirect to ('/')
+  end
 end
 
 post '/workouts' do
@@ -20,8 +33,24 @@ post '/workouts' do
 end
 
 get '/workout/:name' do |name|
+  if current_user
+    @workout = Workout.find_by(name: name)
+    @session = Session.find_by(workout_id: @workout.id)
+    erb :'workouts/show'
+  else
+    redirect to ('/')
+  end
+end
+
+post '/workout/:name' do |name|
   @workout = Workout.find_by(name: name)
-  erb :'workouts/show'
+  @exercise = Exercise.find_by(params[:exercise])
+  Session.create(workout_id: @workout.id, exercise_id: @exercise.id)
+  if request.xhr?
+    erb :'/workouts/_add_exercise', layout: false
+  else
+    redirect to ("/workout/#{@workout.name}")
+  end
 end
 
 delete '/workout/:name' do |name|
@@ -43,12 +72,20 @@ end
 # Exercise Pages
 
 get '/exercises' do
-  @exercises = Exercise.all
-  erb :'exercises/all'
+  if current_user
+    @exercises = Exercise.all
+    erb :'exercises/all'
+  else
+    redirect to ('/')
+  end
 end
 
 get '/exercise/new' do
-  erb :'exercises/_new'
+  if current_user
+      erb :'exercises/_new'
+  else
+    redirect to ('/')
+  end
 end
 
 post '/exercises' do
@@ -62,11 +99,37 @@ post '/exercises' do
 end
 
 get '/exercise/:name' do |name|
+  if current_user
+    @exercise = Exercise.find_by(name: name)
+    erb :'exercises/show'
+  else
+    redirect to ('/')
+  end
+end
+
+delete '/exercise/:name' do |name|
   @exercise = Exercise.find_by(name: name)
-  erb :'exercises/show'
+  @exercise.destroy
+  redirect to('/exercises')
 end
 
 # User Pages
-get '/:name' do
-  erb :user
+get '/:name' do |name|
+  if current_user
+    @user = User.find_by(name: name)
+    erb :'users/user'
+  else
+    redirect to ('/')
+  end
+end
+
+post '/:name' do |name|
+  @user = User.find_by(name: name)
+  @workout = Workout.find_by(params[:workout])
+  Schedule.create(user_id: @user.id, workout_id: @workout.id)
+  if request.xhr?
+    erb :'users/_add_workout', layout: false
+  else
+    redirect to ("/#{@user.name}")
+  end
 end

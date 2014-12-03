@@ -3,7 +3,20 @@
 <%= @workout.description %>
 
 
-  <form action="/workout/<%= @workout.name %>" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete">
-  </form>
+<form action="/workout/<%= @workout.name %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>
+
+<ol id="list">
+  <% @workout.exercises.each do |exercise| %>
+    <li><a href="/exercise/<%= exercise.name %>"><%= exercise.name %></a><br>
+    <%= exercise.description %></li>
+  <% end %>
+</ol>
+
+<form id="new" action="/workout/<%= @workout.name %>" method="POST">
+  Add Exercise:<br>
+  <input name="exercise[name]" type="text"><br>
+  <input type="submit" value="Add">
+</form>
