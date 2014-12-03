@@ -1,4 +1,3 @@
-<%= @user.name %>
 <ol id="list">
   <% @user.workouts.each do |workout| %>
     <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a><%= workout.category %></li>
@@ -8,5 +7,14 @@
 <form id="new" action="/<%= @user.name %>" method="POST">
   Add Workout:<br>
   <input name="workout[name]" type="text"><br>
+  <input type="submit" value="Add">
+</form>
+
+<h4>Let the Gym Gods Decide:</h4>
+<form id="new" action="/<%= @user.name %>" method="POST">
+  Type:<br>
+  <input name="sets" type="text"><br>
+  Sets:</br>
+  <input name="how_many" type="text"><br>
   <input type="submit" value="Add">
 </form>

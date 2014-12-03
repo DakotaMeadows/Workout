@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/css/application.css">
-  <!-- Load Vollkorn font -->
-  <link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+<html class ="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="/css/application.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/backstretch.js"></script>
+    <script src="js/application.js"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= current_user.name %></h1>
+    </li>
+  </ul>
 
-  <title></title>
-</head>
-<body>
-<div id="content">
-  <header>
-  </header>
-  <%= yield %>
-</div>
-</body>
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <% if current_user %>
+      <li><a href="/logout">Logout</a></li>
+      <% else %>
+      <li><a href="/login">Login</a></li>
+      <% end %>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="/workouts">All Workouts</a></li>
+      <li><a href="/exercises">All Exercises</a></li>
+    </ul>
+  </section>
+</nav>
+    <div id="content">
+      <div class="large-4 columns"></div>
+      <div class="large-4 large-centered columns">
+        <%= yield %>
+      </div>
+      <div class="large-4 columns"></div>
+    </div>
+  </body>
 </html>

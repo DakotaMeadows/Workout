@@ -1,5 +1,9 @@
 get '/' do
-  erb :homepage
+  if current_user
+    redirect to ("/#{current_user.name}")
+  else
+    erb :homepage
+  end
 end
 
 get '/login' do

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  // $.backstretch("img/abraham.jpeg");
+
   $('#new').submit(function(event) {
     event.preventDefault();
     var $target = $(event.target);
