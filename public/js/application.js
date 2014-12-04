@@ -28,19 +28,17 @@ $(document).ready(function() {
     });
   });
 
-  // $('#delete').submit(function(event) {
-  //   event.preventDefault();
-  //   $target = $(event.target);
+  $('form#delete').submit(function(event) {
+    event.preventDefault();
+    $target = $(event.target);
 
-  //   $.ajax({
-  //     url: $target.attr('action'),
-  //     type: "POST",
-  //     dataType: "json",
-  //     data: {"_method":"delete"}
-  //   }).done(function(response) {
-  //     console.log(response);
-  //     $target.parent().remove();
-  //   })
-  // })
+    $.ajax({
+      url: $target.attr('action'),
+      type: "DELETE"
+    }).done(function(response) {
+      // $target.parent().remove();
+      $('#list').html()
+    })
+  })
 
 });

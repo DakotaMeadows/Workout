@@ -1,6 +1,6 @@
 <ol id="list">
   <% @user.workouts.each do |workout| %>
-    <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a><%= workout.category %><%= workout.description %></li>
+    <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a> - <%= workout.category %><br><%= workout.description %></li>
   <% end %>
 </ol>
 

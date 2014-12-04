@@ -59,15 +59,16 @@ delete '/workout/:name' do |name|
   redirect to('/workouts')
 end
 
-# delete '/workouts' do
-#   @workout = Workout.find_by(params[:workout])
-#   if request.xhr?
-#     erb :'workouts/_delete', locals: {workout: @workout}, layout: false
-#   else
-#     # @workout.destroy
-#     redirect to("/workouts")
-#   end
-# end
+delete '/workouts' do
+  if request.xhr?
+    @workout.destroy
+    # erb :'workouts/_delete', locals: {workout: @workout}, layout: false
+    # erb :'workouts/all', layout: false
+  else
+    # @workout.destroy
+    redirect to("/workouts")
+  end
+end
 
 # Exercise Pages
 
