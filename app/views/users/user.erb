@@ -1,6 +1,6 @@
 <ol id="list">
   <% @user.workouts.each do |workout| %>
-    <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a><%= workout.category %></li>
+    <li><a href="/workout/<%= workout.name %>"><%= workout.name %></a><%= workout.category %><%= workout.description %></li>
   <% end %>
 </ol>
 
@@ -17,6 +17,6 @@
   Type:<br>
   <input name="type" type="text"><br>
   Sets:</br>
-  <input name="how_many" type="text"><br>
+  <input name="times" type="text"><br>
   <input type="submit" value="Create">
 </form>

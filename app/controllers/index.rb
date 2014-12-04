@@ -124,18 +124,22 @@ get '/:name' do |name|
 end
 
 post '/:name' do |name|
+  @user = User.find_by(name: name)
   if params[:title]
-    @title = params[:title]
-    @type = params[:type]
-    @exercises = Exercise.where(category: @type)
-    @how_many = params[:how_many]
+    @workout = Workout.create(name: params[:title], category: params[:type], description: "#{DateTime.now}")
+    @exercises = Exercise.where(category: @workout.category)
+    @how_many = params[:times].to_i
+    @exercises.sort_by{rand}[0..(@how_many - 1)].each do |exercise|
+      Session.create(exercise_id: exercise.id, workout_id: @workout.id)
+    end
+    Schedule.create(user_id: @user.id, workout_id: @workout.id)
     if request.xhr?
-      erb :'users/_random', layout: false
+      Schedule.create(user_id: @user.id, workout_id: @workout.id)
+      erb :'users/_add_workout', layout: false
     else
       redirect to ("/#{@user.name}")
     end
   else
-    @user = User.find_by(name: name)
     @workout = Workout.find_by(params[:workout])
     Schedule.create(user_id: @user.id, workout_id: @workout.id)
     if request.xhr?
